@@ -38,6 +38,7 @@ pimcore.object.tags.objectbricks = Class.create(pimcore.object.tags.abstract, {
     },
 
     loadFieldDefinitions: function () {
+
         this.fieldstore = new Ext.data.Store({
             proxy: {
                 type: 'ajax',
@@ -48,7 +49,7 @@ pimcore.object.tags.objectbricks = Class.create(pimcore.object.tags.abstract, {
                     idProperty: 'key'
                 },
                 extraParams: {
-                    class_id: this.object.data.general.o_classId,
+                    class_name: this.object.data.general.o_className,
                     object_id: this.object.id,
                     field_name: this.getName(),
                     layoutId: this.object.data.currentLayoutId
