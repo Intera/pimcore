@@ -125,7 +125,7 @@ class IndexController extends AdminController
 
         // DB
         try {
-            $tables = $db->fetchAll('SELECT TABLE_NAME as name,TABLE_ROWS as rows from information_schema.TABLES 
+            $tables = $db->fetchAll('SELECT TABLE_NAME as name,TABLE_ROWS as rows from information_schema.TABLES
                 WHERE TABLE_ROWS IS NOT NULL AND TABLE_SCHEMA = ?', [$db->getDatabase()]);
 
             $mysqlVersion = $db->fetchOne('SELECT VERSION()');
@@ -276,6 +276,7 @@ class IndexController extends AdminController
             'asset_tree_paging_limit' => $pimcoreSymfonyConfig['assets']['tree_paging_limit'],
             'document_tree_paging_limit' => $pimcoreSymfonyConfig['documents']['tree_paging_limit'],
             'object_tree_paging_limit' => $pimcoreSymfonyConfig['objects']['tree_paging_limit'],
+            'maxmind_geoip_installed' => (bool) $this->getParameter('pimcore.geoip.db_file')
         ]);
 
         $dashboardHelper = new \Pimcore\Helper\Dashboard($user);
