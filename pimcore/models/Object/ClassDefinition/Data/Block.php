@@ -238,7 +238,9 @@ class Block extends Model\Object\ClassDefinition\Data
                         continue;
                     }
                     $elementData = $blockElement->getData();
-                    $params['context']['containerType'] = 'block';
+                    // This is a workaround to suppress PHP warnings in JSON output. For some reason they are
+                    // printed to the frontend even if display_errors is set to "off".
+                    @$this->setContainerTypeBlock($params);
                     $dataForEditMode = $fd->getDataForEditmode($elementData, $object, $params);
                     $resultElement[$elementName] = $dataForEditMode;
                 }
@@ -250,6 +252,11 @@ class Block extends Model\Object\ClassDefinition\Data
         }
 
         return $result;
+    }
+
+    private function setContainerTypeBlock(&$params)
+    {
+        $params['context']['containerType'] = 'block';
     }
 
     /**
